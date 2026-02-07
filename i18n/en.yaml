@@ -1,0 +1,5 @@
+# Keys used by Hugo's built-in pagination template (_internal/pagination.html)
+prev_page:
+  other: "Newer posts"
+next_page:
+  other: "Older posts"

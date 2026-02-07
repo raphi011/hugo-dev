@@ -1,0 +1,301 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * Catppuccin color palette
+ * Light: Latte — Dark: Mocha
+ * Switches automatically via prefers-color-scheme.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Catppuccin Latte */
+  --ctp-base: #eff1f5;
+  --ctp-mantle: #e6e9ef;
+  --ctp-crust: #dce0e8;
+  --ctp-surface0: #ccd0da;
+  --ctp-surface1: #bcc0cc;
+  --ctp-surface2: #acb0be;
+  --ctp-text: #4c4f69;
+  --ctp-subtext1: #5c5f77;
+  --ctp-subtext0: #6c6f85;
+  --ctp-overlay2: #7c7f93;
+  --ctp-overlay1: #8c8fa1;
+  --ctp-overlay0: #9ca0b0;
+  --ctp-blue: #1e66f5;
+  --ctp-lavender: #7287fd;
+  --ctp-mauve: #8839ef;
+  --ctp-sapphire: #209fb5;
+  --ctp-teal: #179299;
+  --ctp-green: #40a02b;
+  --ctp-red: #d20f39;
+  --ctp-peach: #fe640b;
+  --ctp-yellow: #df8e1d;
+  --ctp-flamingo: #dd7878;
+  --ctp-pink: #ea76cb;
+  --ctp-rosewater: #dc8a78;
+  --ctp-sky: #04a5e5;
+  --ctp-maroon: #e64553;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Catppuccin Mocha */
+    --ctp-base: #1e1e2e;
+    --ctp-mantle: #181825;
+    --ctp-crust: #11111b;
+    --ctp-surface0: #313244;
+    --ctp-surface1: #45475a;
+    --ctp-surface2: #585b70;
+    --ctp-text: #cdd6f4;
+    --ctp-subtext1: #bac2de;
+    --ctp-subtext0: #a6adc8;
+    --ctp-overlay2: #9399b2;
+    --ctp-overlay1: #7f849c;
+    --ctp-overlay0: #6c7086;
+    --ctp-blue: #89b4fa;
+    --ctp-lavender: #b4befe;
+    --ctp-mauve: #cba6f7;
+    --ctp-sapphire: #74c7ec;
+    --ctp-teal: #94e2d5;
+    --ctp-green: #a6e3a1;
+    --ctp-red: #f38ba8;
+    --ctp-peach: #fab387;
+    --ctp-yellow: #f9e2af;
+    --ctp-flamingo: #f2cdcd;
+    --ctp-pink: #f5c2e7;
+    --ctp-rosewater: #f5e0dc;
+    --ctp-sky: #89dceb;
+    --ctp-maroon: #eba0ac;
+  }
+}
+
+/* Register Catppuccin palette with Tailwind v4 */
+@theme {
+  --color-ctp-base: var(--ctp-base);
+  --color-ctp-mantle: var(--ctp-mantle);
+  --color-ctp-crust: var(--ctp-crust);
+  --color-ctp-surface0: var(--ctp-surface0);
+  --color-ctp-surface1: var(--ctp-surface1);
+  --color-ctp-surface2: var(--ctp-surface2);
+  --color-ctp-text: var(--ctp-text);
+  --color-ctp-subtext1: var(--ctp-subtext1);
+  --color-ctp-subtext0: var(--ctp-subtext0);
+  --color-ctp-overlay2: var(--ctp-overlay2);
+  --color-ctp-overlay1: var(--ctp-overlay1);
+  --color-ctp-overlay0: var(--ctp-overlay0);
+  --color-ctp-blue: var(--ctp-blue);
+  --color-ctp-lavender: var(--ctp-lavender);
+  --color-ctp-mauve: var(--ctp-mauve);
+  --color-ctp-sapphire: var(--ctp-sapphire);
+  --color-ctp-teal: var(--ctp-teal);
+  --color-ctp-green: var(--ctp-green);
+  --color-ctp-red: var(--ctp-red);
+  --color-ctp-peach: var(--ctp-peach);
+  --color-ctp-yellow: var(--ctp-yellow);
+  --color-ctp-flamingo: var(--ctp-flamingo);
+  --color-ctp-pink: var(--ctp-pink);
+  --color-ctp-rosewater: var(--ctp-rosewater);
+  --color-ctp-sky: var(--ctp-sky);
+  --color-ctp-maroon: var(--ctp-maroon);
+}
+
+/* Tailwind Typography prose overrides for Catppuccin */
+.prose {
+  --tw-prose-body: var(--ctp-text);
+  --tw-prose-headings: var(--ctp-text);
+  --tw-prose-lead: var(--ctp-subtext1);
+  --tw-prose-links: var(--ctp-blue);
+  --tw-prose-bold: var(--ctp-text);
+  --tw-prose-counters: var(--ctp-subtext0);
+  --tw-prose-bullets: var(--ctp-overlay0);
+  --tw-prose-hr: var(--ctp-surface0);
+  --tw-prose-quotes: var(--ctp-subtext1);
+  --tw-prose-quote-borders: var(--ctp-surface1);
+  --tw-prose-captions: var(--ctp-subtext0);
+  --tw-prose-kbd: var(--ctp-text);
+  --tw-prose-kbd-shadows: 0 0 0;
+  --tw-prose-code: var(--ctp-mauve);
+  --tw-prose-pre-code: var(--ctp-text);
+  --tw-prose-pre-bg: var(--ctp-mantle);
+  --tw-prose-th-borders: var(--ctp-surface1);
+  --tw-prose-td-borders: var(--ctp-surface0);
+}
+
+/* Inline code styling */
+.prose :where(code):not(:where(pre *)) {
+  background-color: var(--ctp-mantle);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose :where(code):not(:where(pre *))::before,
+.prose :where(code):not(:where(pre *))::after {
+  content: none;
+}
+
+/* Shiki dual-theme: activate dark CSS variables in dark mode */
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+/* Code block base styling */
+.shiki {
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border: 1px solid var(--ctp-surface0);
+}
+
+/* Line numbers via CSS counters */
+.shiki code {
+  counter-reset: line;
+}
+
+.shiki code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--ctp-overlay0);
+  user-select: none;
+}
+
+/* Copy button */
+.shiki-wrapper {
+  position: relative;
+}
+
+.shiki-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  background: var(--ctp-surface0);
+  color: var(--ctp-subtext0);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.shiki-wrapper:hover .shiki-copy {
+  opacity: 1;
+}
+
+/* Tighter prose spacing */
+.prose :where(li):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.prose :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+}
+
+.prose :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose :where(hr):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Alert callouts (GitHub-style > [!NOTE] etc.) */
+.alert {
+  border-left: 3px solid var(--ctp-overlay0);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  margin: 1.5em 0;
+  background-color: var(--ctp-mantle);
+  font-style: normal;
+}
+
+.alert p:last-child {
+  margin-bottom: 0;
+}
+
+.prose .alert p::before,
+.prose .alert p::after {
+  content: none;
+}
+
+.alert-heading {
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.alert-note {
+  border-left-color: var(--ctp-blue);
+}
+
+.alert-note .alert-heading {
+  color: var(--ctp-blue);
+}
+
+.alert-tip {
+  border-left-color: var(--ctp-green);
+}
+
+.alert-tip .alert-heading {
+  color: var(--ctp-green);
+}
+
+.alert-important {
+  border-left-color: var(--ctp-mauve);
+}
+
+.alert-important .alert-heading {
+  color: var(--ctp-mauve);
+}
+
+.alert-warning {
+  border-left-color: var(--ctp-yellow);
+}
+
+.alert-warning .alert-heading {
+  color: var(--ctp-yellow);
+}
+
+.alert-caution {
+  border-left-color: var(--ctp-red);
+}
+
+.alert-caution .alert-heading {
+  color: var(--ctp-red);
+}
+
+/* Fallback for unhighlighted code blocks (dev mode without rehype) */
+pre:not(.shiki) {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  background-color: var(--ctp-mantle);
+  color: var(--ctp-text);
+}

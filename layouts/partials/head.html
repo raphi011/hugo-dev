@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+{{ with or .Description .Site.Params.description }}
+<meta name="description" content="{{ . }}">
+{{ end }}
+
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+{{/* CSS: load pre-compiled Tailwind output, then minify and fingerprint via Hugo Pipes */}}
+{{ $css := resources.Get "css/compiled/main.css" }}
+{{ if $css }}
+  {{ $css = $css | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ else }}
+  {{ warnf "Paper theme: css/compiled/main.css not found. Run 'npm run build:css' first." }}
+{{ end }}
+
+{{/* Custom CSS override hook */}}
+{{ $custom := resources.Get "css/custom.css" }}
+{{ if $custom }}
+  {{ $custom = $custom | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
+{{ end }}
+
+{{/* User-provided custom head hook */}}
+{{ if templates.Exists "partials/custom-head.html" }}
+  {{ partial "custom-head.html" . }}
+{{ end }}
+
+{{/* Favicons */}}
+{{ with .Site.Params.favicon }}
+  <link rel="icon" href="{{ . }}">
+{{ else }}
+  <link rel="icon" href="{{ "favicon.ico" | relURL }}">
+{{ end }}
+
+{{/* RSS */}}
+{{ range .AlternativeOutputFormats }}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end }}
+
+{{/* Canonical URL */}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Hugo built-in templates */}}
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ template "_internal/schema.html" . }}
