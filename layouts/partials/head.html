@@ -16,13 +16,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap">
 
-{{/* CSS: load pre-compiled Tailwind output, then minify and fingerprint via Hugo Pipes */}}
-{{ $css := resources.Get "css/compiled/main.css" }}
-{{ if $css }}
+{{/* CSS: process Tailwind source via Hugo's built-in css.TailwindCSS pipe */}}
+{{ with resources.Get "css/main.css" }}
+  {{ $css := . | css.TailwindCSS }}
   {{ $css = $css | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-{{ else }}
-  {{ warnf "Paper theme: css/compiled/main.css not found. Run 'npm run build:css' first." }}
 {{ end }}
 
 {{/* Custom CSS override hook */}}

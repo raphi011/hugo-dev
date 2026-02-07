@@ -3,4 +3,3 @@
 exampleSite/public
 /resources
 .hugo_build.lock
-assets/css/compiled/main.css

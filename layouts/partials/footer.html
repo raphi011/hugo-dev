@@ -8,14 +8,9 @@
     </div>
     {{ with .Site.Params.social }}
       <div class="flex items-center gap-3">
-        {{ with .github }}
-          <a class="social-icon" style="--icon:url({{ "github.svg" | relURL }})" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-            <span class="sr-only">GitHub</span>
-          </a>
-        {{ end }}
-        {{ with .linkedin }}
-          <a class="social-icon" style="--icon:url({{ "linkedin.svg" | relURL }})" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-            <span class="sr-only">LinkedIn</span>
+        {{ range . }}
+          <a class="social-icon" style="--icon:url({{ .icon | relURL }})" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">{{ .name }}</span>
           </a>
         {{ end }}
       </div>
