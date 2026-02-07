@@ -2,5 +2,4 @@
 /public
 /resources
 .hugo_build.lock
-hugo_stats.json
 assets/css/compiled/main.css

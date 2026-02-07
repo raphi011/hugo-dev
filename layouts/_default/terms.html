@@ -1,10 +1,10 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
   <ul>
-    {{ range .Pages }}
+    {{ range $term := .Pages }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <small>({{ len .Pages }})</small>
+        <a href="{{ $term.RelPermalink }}">{{ $term.Title }}</a>
+        <small>({{ len $term.Pages }})</small>
       </li>
     {{ end }}
   </ul>

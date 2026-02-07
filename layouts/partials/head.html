@@ -3,15 +3,19 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+{{ with or .Description .Site.Params.description }}
+<meta name="description" content="{{ . }}">
+{{ end }}
 
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
-{{/* CSS: use Hugo Pipes to process the compiled Tailwind output */}}
+{{/* CSS: load pre-compiled Tailwind output, then minify and fingerprint via Hugo Pipes */}}
 {{ $css := resources.Get "css/compiled/main.css" }}
 {{ if $css }}
   {{ $css = $css | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ else }}
+  {{ warnf "Paper theme: css/compiled/main.css not found. Run 'npm run build:css' first." }}
 {{ end }}
 
 {{/* Custom CSS override hook */}}

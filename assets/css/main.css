@@ -1,29 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Theme: Paper
- *
- * This is the main CSS entry point. Tailwind CSS v4 uses CSS-first
- * configuration — customize your theme using @theme below.
- *
- * https://tailwindcss.com/docs/theme
- */
-
-@theme {
-  /* Override or extend Tailwind's default theme here */
-}
-
-/*
- * Color scheme: automatic dark/light switching via prefers-color-scheme.
- *
- * Define all theme colors as CSS custom properties on :root (light) and
- * :root.dark (dark). Components should reference these properties so
- * switching happens in one place.
- *
- * Tailwind's dark: variant is driven by the .dark class on <html>,
- * which is toggled via a <script> in baseof.html that reads the OS
- * preference.
+ * Color scheme: the .dark class on <html> is toggled via a <script> in
+ * baseof.html that reads prefers-color-scheme. Components should reference
+ * these CSS custom properties so switching happens in one place.
  */
 
 :root {
@@ -46,6 +28,3 @@
   --color-surface: #1e1e1e;
 }
 
-/* Custom component styles go here */
-
-/* Custom utility styles go here */

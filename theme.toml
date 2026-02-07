@@ -6,7 +6,7 @@ licenselink = "https://github.com/raphi011/hugo-dev/blob/main/LICENSE"
 description = "A clean, minimal Hugo theme"
 homepage = "https://github.com/raphi011/hugo-dev"
 tags = ["blog", "minimal", "clean", "responsive", "dark mode"]
-features = ["blog", "responsive", "dark mode", "syntax highlighting"]
+features = ["blog", "dark mode"]
 min_version = "0.145.0"
 
 [author]

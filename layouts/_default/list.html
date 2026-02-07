@@ -1,18 +1,23 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
   {{ .Content }}
-  {{ range .Paginator.Pages }}
-    <article>
-      <h2>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </h2>
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "January 2, 2006" }}
-      </time>
-      {{ if .Summary }}
-        <p>{{ .Summary }}</p>
-      {{ end }}
-    </article>
+  {{ $paginator := .Paginator }}
+  {{ if $paginator.Pages }}
+    {{ range $paginator.Pages }}
+      <article>
+        <h2>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+        {{ if not .Date.IsZero }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ end }}
+        {{ with .Summary }}
+          <p>{{ . }}</p>
+        {{ end }}
+      </article>
+    {{ end }}
+    {{ template "_internal/pagination.html" . }}
   {{ end }}
-  {{ template "_internal/pagination.html" . }}
 {{ end }}
