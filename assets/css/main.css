@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@source "hugo_stats.json";
 
 /*
  * Catppuccin color palette

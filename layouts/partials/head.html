@@ -16,18 +16,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap">
 
-{{/* CSS: process Tailwind source via Hugo's built-in css.TailwindCSS pipe */}}
-{{ with resources.Get "css/main.css" }}
-  {{ $css := . | css.TailwindCSS }}
-  {{ $css = $css | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-{{ end }}
+{{/* CSS: Deferred so Tailwind runs after hugo_stats.json is complete */}}
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ with resources.Get "css/main.css" }}
+    {{ $css := . | css.TailwindCSS }}
+    {{ $css = $css | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ end }}
 
-{{/* Custom CSS override hook */}}
-{{ $custom := resources.Get "css/custom.css" }}
-{{ if $custom }}
-  {{ $custom = $custom | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
+  {{/* Custom CSS override hook */}}
+  {{ $custom := resources.Get "css/custom.css" }}
+  {{ if $custom }}
+    {{ $custom = $custom | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
+  {{ end }}
 {{ end }}
 
 {{/* User-provided custom head hook */}}
