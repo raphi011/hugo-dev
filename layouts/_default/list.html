@@ -17,19 +17,6 @@
                   {{ .Date.Format "Jan 2, 2006" }}
                 </time>
               {{ end }}
-              {{ with .Description | default .Summary }}
-                <p class="mt-1 text-ctp-subtext1 text-sm leading-relaxed">{{ . }}</p>
-              {{ end }}
-              {{ with .Params.tags }}
-                <div class="flex flex-wrap gap-1.5 mt-2">
-                  {{ range . }}
-                    <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"
-                       class="inline-block rounded-full bg-ctp-surface0 px-2.5 py-0.5 text-xs text-ctp-subtext0 hover:bg-ctp-surface1 hover:text-ctp-text transition-colors">
-                      {{ . }}
-                    </a>
-                  {{ end }}
-                </div>
-              {{ end }}
             </article>
           {{ end }}
         </div>
