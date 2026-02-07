@@ -1,54 +1,32 @@
 {{ define "main" }}
-  <div class="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-8">
-    {{/* Article list */}}
-    <div>
-      {{ $paginator := .Paginator }}
-      {{ if $paginator.Pages }}
-        <div class="space-y-8">
-          {{ range $paginator.Pages }}
-            <article>
-              <h2 class="text-xl font-semibold">
-                <a href="{{ .RelPermalink }}" class="text-ctp-text hover:text-ctp-blue transition-colors">
-                  {{ .Title }}
-                </a>
-              </h2>
-              {{ if not .Date.IsZero }}
-                <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
-                  {{ .Date.Format "Jan 2, 2006" }}
-                </time>
-              {{ end }}
-            </article>
+  {{ $paginator := .Paginator }}
+  {{ if $paginator.Pages }}
+    <div class="space-y-8">
+      {{ range $paginator.Pages }}
+        <article>
+          <h2 class="text-xl font-semibold font-pixel">
+            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-lavender transition-colors">
+              {{ .Title }}
+            </a>
+          </h2>
+          {{ if not .Date.IsZero }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
+              {{ .Date.Format "Jan 2, 2006" }}
+            </time>
           {{ end }}
-        </div>
-        {{ if gt $paginator.TotalPages 1 }}
-          <nav class="mt-8 flex items-center justify-center gap-4 text-sm">
-            {{ if $paginator.HasPrev }}
-              <a href="{{ $paginator.Prev.URL }}" class="text-ctp-blue hover:underline">&larr; Newer</a>
-            {{ end }}
-            <span class="text-ctp-overlay0">{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}</span>
-            {{ if $paginator.HasNext }}
-              <a href="{{ $paginator.Next.URL }}" class="text-ctp-blue hover:underline">Older &rarr;</a>
-            {{ end }}
-          </nav>
-        {{ end }}
+        </article>
       {{ end }}
     </div>
-
-    {{/* Tags sidebar */}}
-    {{ $tags := .Site.Taxonomies.tags }}
-    {{ if $tags }}
-      <aside class="lg:border-l lg:border-ctp-surface0 lg:pl-6">
-        <h3 class="text-sm font-semibold text-ctp-text mb-3">Tags</h3>
-        <div class="flex flex-wrap gap-1.5 lg:flex-col lg:gap-0">
-          {{ range $tags.Alphabetical }}
-            <a href="{{ .Page.RelPermalink }}"
-               class="inline-flex items-center gap-1.5 rounded-full bg-ctp-surface0 px-2.5 py-0.5 text-xs text-ctp-subtext0 hover:bg-ctp-surface1 hover:text-ctp-text transition-colors lg:rounded-none lg:bg-transparent lg:px-0 lg:py-1.5">
-              {{ .Page.Title }}
-              <span class="text-ctp-overlay0">({{ .Count }})</span>
-            </a>
-          {{ end }}
-        </div>
-      </aside>
+    {{ if gt $paginator.TotalPages 1 }}
+      <nav class="mt-8 flex items-center justify-center gap-4 text-sm">
+        {{ if $paginator.HasPrev }}
+          <a href="{{ $paginator.Prev.URL }}" class="text-ctp-blue hover:underline">&larr; Newer</a>
+        {{ end }}
+        <span class="text-ctp-overlay0">{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}</span>
+        {{ if $paginator.HasNext }}
+          <a href="{{ $paginator.Next.URL }}" class="text-ctp-blue hover:underline">Older &rarr;</a>
+        {{ end }}
+      </nav>
     {{ end }}
-  </div>
+  {{ end }}
 {{ end }}

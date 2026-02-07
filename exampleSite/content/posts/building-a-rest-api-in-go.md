@@ -7,17 +7,17 @@ tags:
 description: "A comprehensive guide to building production-ready REST APIs with Go's standard library."
 ---
 
-Building REST APIs in Go is surprisingly pleasant. The standard library gives you everything you need — no frameworks required. In this post, we'll build a **complete API** from scratch, covering routing, middleware, error handling, and testing.
+Building REST APIs in Go is surprisingly pleasant. The [standard library](https://pkg.go.dev/std) gives you everything you need — no frameworks required. In this post, we'll build a **complete API** from scratch, covering routing, middleware, error handling, and testing.
 
 ## Prerequisites
 
 Before we begin, make sure you have:
 
-1. Go 1.22 or later installed
-2. Basic familiarity with HTTP concepts
+1. [Go 1.22](https://go.dev/doc/go1.22) or later installed
+2. Basic familiarity with [HTTP concepts](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 3. A terminal and your favorite editor
 
-You should also understand how `net/http` works at a high level — we'll build on top of it rather than replacing it.
+You should also understand how [`net/http`](https://pkg.go.dev/net/http) works at a high level — we'll build on top of it rather than replacing it.
 
 ---
 
@@ -272,7 +272,7 @@ func main() {
 
 ## Testing
 
-Go's `httptest` package makes API testing straightforward. Here's a test for the create + get flow:
+Go's [`httptest`](https://pkg.go.dev/net/http/httptest) package makes API testing straightforward. Here's a test for the create + get flow:
 
 ```go
 func TestCreateAndGetPost(t *testing.T) {
@@ -325,9 +325,9 @@ go test ./... -v -count=1
 
 A few things to keep in mind as traffic grows:
 
-- **Connection pooling** — `http.Server` handles this for you, but set `ReadTimeout` and `WriteTimeout` to avoid slow-client attacks
+- **Connection pooling** — `http.Server` handles this for you, but set [`ReadTimeout` and `WriteTimeout`](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/) to avoid slow-client attacks
 - **JSON encoding** — `json.NewEncoder` writes directly to the response, avoiding a buffer allocation. Prefer it over `json.Marshal` + `w.Write`
-- **Mutex granularity** — our `sync.RWMutex` works for simple cases, but switch to a real database before you need sharding
+- **Mutex granularity** — our [`sync.RWMutex`](https://pkg.go.dev/sync#RWMutex) works for simple cases, but switch to a real database before you need sharding
 
 ### Benchmarking
 

@@ -1,8 +1,32 @@
 <footer class="border-t border-ctp-surface0">
-  <div class="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-ctp-overlay0">
-    &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
-    {{ with .Site.Params.commitHash }}
-      &middot; <span class="font-mono text-xs">{{ . | truncate 7 "" }}</span>
+  <div class="max-w-3xl mx-auto px-4 py-6 flex items-center justify-between text-sm text-ctp-overlay0">
+    <div>
+      &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
+      {{ with .Site.Params.commitHash }}
+        &middot; <span class="font-mono text-xs">{{ . | truncate 7 "" }}</span>
+      {{ end }}
+    </div>
+    {{ with .Site.Params.social }}
+      <div class="flex items-center gap-3">
+        {{ with .github }}
+          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
+             style="--url:url(/github.svg)"
+             href="{{ . }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span class="sr-only">GitHub</span>
+          </a>
+        {{ end }}
+        {{ with .linkedin }}
+          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
+             style="--url:url(/linkedin.svg)"
+             href="{{ . }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+        {{ end }}
+      </div>
     {{ end }}
   </div>
 </footer>
