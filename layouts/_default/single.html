@@ -1,24 +1,13 @@
 {{ define "main" }}
   <article class="prose max-w-none">
-    <header class="not-prose mb-6 border-b border-ctp-surface0 pb-6">
-      <h1 class="text-3xl font-bold text-ctp-text">{{ .Title }}</h1>
+    <header class="not-prose mb-6">
+      <h1 class="text-4xl font-bold text-ctp-blue">{{ .Title }}</h1>
       {{ if not .Date.IsZero }}
         <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
           {{ .Date.Format "Jan 2, 2006" }}
         </time>
       {{ end }}
-      {{ with .Params.tags }}
-        <div class="flex flex-wrap gap-1.5 mt-2">
-          {{ range . }}
-            <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"
-               class="inline-block rounded-full border border-ctp-surface1 px-2.5 py-0.5 text-xs text-ctp-subtext1 hover:border-ctp-blue hover:text-ctp-blue transition-colors">
-              {{ . }}
-            </a>
-          {{ end }}
-        </div>
-      {{ end }}
     </header>
     {{ .Content }}
   </article>
-  {{ partial "newsletter.html" . }}
 {{ end }}

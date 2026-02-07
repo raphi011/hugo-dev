@@ -71,8 +71,11 @@
   }
 }
 
-/* Register Catppuccin palette with Tailwind v4 */
+/* Register font stacks and Catppuccin palette as Tailwind v4 theme tokens */
 @theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
   --color-ctp-base: var(--ctp-base);
   --color-ctp-mantle: var(--ctp-mantle);
   --color-ctp-crust: var(--ctp-crust);
@@ -101,15 +104,38 @@
   --color-ctp-maroon: var(--ctp-maroon);
 }
 
+/* Global focus indicator for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--ctp-blue);
+  outline-offset: 2px;
+}
+
+/* Page fade-in-up animation (respects reduced motion preference) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  main {
+    animation: fade-in-up 0.4s ease-out;
+  }
+}
+
 /* Tailwind Typography prose overrides for Catppuccin */
 .prose {
   --tw-prose-body: var(--ctp-text);
   --tw-prose-headings: var(--ctp-text);
   --tw-prose-lead: var(--ctp-subtext1);
-  --tw-prose-links: var(--ctp-blue);
   --tw-prose-bold: var(--ctp-text);
   --tw-prose-counters: var(--ctp-subtext0);
-  --tw-prose-bullets: var(--ctp-overlay0);
+  --tw-prose-bullets: var(--ctp-overlay1);
   --tw-prose-hr: var(--ctp-surface0);
   --tw-prose-quotes: var(--ctp-subtext1);
   --tw-prose-quote-borders: var(--ctp-surface1);
@@ -123,8 +149,18 @@
   --tw-prose-td-borders: var(--ctp-surface0);
 }
 
+/* Prose link styling: inherit parent text color, blue underline only */
+.prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--ctp-blue);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 /* Inline code styling */
 .prose :where(code):not(:where(pre *)) {
+  font-family: var(--font-mono);
   background-color: var(--ctp-mantle);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
@@ -148,13 +184,27 @@
   }
 }
 
-/* Code block base styling */
-.shiki {
-  padding: 1rem 1rem 1rem 0;
-  border-radius: 0.5rem;
+/* Shared code block base */
+.shiki,
+pre:not(.shiki) {
+  font-family: var(--font-mono);
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.7;
+}
+
+/* Fallback styling for code blocks not processed by Shiki (extends shared base above) */
+pre:not(.shiki) {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--ctp-mantle);
+  color: var(--ctp-text);
+}
+
+/* Shiki-specific styling (padding, border, rounding) */
+.shiki {
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 0.5rem;
   border: 1px solid var(--ctp-surface0);
 }
 
@@ -170,7 +220,7 @@
   width: 2rem;
   margin-right: 1rem;
   text-align: right;
-  color: var(--ctp-overlay0);
+  color: var(--ctp-overlay1);
   user-select: none;
 }
 
@@ -194,7 +244,8 @@
   transition: opacity 0.15s;
 }
 
-.shiki-wrapper:hover .shiki-copy {
+.shiki-wrapper:hover .shiki-copy,
+.shiki-copy:focus-visible {
   opacity: 1;
 }
 
@@ -204,14 +255,22 @@
   margin-bottom: 0.25em;
 }
 
-.prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  margin-top: 1.25em;
-  margin-bottom: 0.5em;
-}
+/* Heading color hierarchy (components layer so utility classes can still override) */
+@layer components {
+  .prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+  }
 
-.prose :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  margin-top: 1em;
-  margin-bottom: 0.4em;
+  .prose :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    color: var(--ctp-subtext1);
+    margin-top: 1em;
+    margin-bottom: 0.4em;
+  }
+
+  .prose :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    color: var(--ctp-subtext0);
+  }
 }
 
 .prose :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
@@ -226,7 +285,8 @@
 
 /* Alert callouts (GitHub-style > [!NOTE] etc.) */
 .alert {
-  border-left: 3px solid var(--ctp-overlay0);
+  --alert-accent: var(--ctp-overlay0);
+  border-left: 3px solid var(--alert-accent);
   border-radius: 0.375rem;
   padding: 0.75rem 1rem;
   margin: 1.5em 0;
@@ -247,55 +307,32 @@
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.25rem;
+  color: var(--alert-accent);
 }
 
-.alert-note {
-  border-left-color: var(--ctp-blue);
+.alert-note      { --alert-accent: var(--ctp-blue); }
+.alert-tip       { --alert-accent: var(--ctp-green); }
+.alert-important { --alert-accent: var(--ctp-mauve); }
+.alert-warning   { --alert-accent: var(--ctp-yellow); }
+.alert-caution   { --alert-accent: var(--ctp-red); }
+
+/* Social icon links (assumes black SVGs on transparent; inverted in dark mode) */
+.social-icon {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--icon) center / contain no-repeat;
+  opacity: 0.7;
+  transition: opacity 0.15s;
 }
 
-.alert-note .alert-heading {
-  color: var(--ctp-blue);
+.social-icon:hover {
+  opacity: 1;
 }
 
-.alert-tip {
-  border-left-color: var(--ctp-green);
+@media (prefers-color-scheme: dark) {
+  .social-icon {
+    filter: invert(1);
+  }
 }
 
-.alert-tip .alert-heading {
-  color: var(--ctp-green);
-}
-
-.alert-important {
-  border-left-color: var(--ctp-mauve);
-}
-
-.alert-important .alert-heading {
-  color: var(--ctp-mauve);
-}
-
-.alert-warning {
-  border-left-color: var(--ctp-yellow);
-}
-
-.alert-warning .alert-heading {
-  color: var(--ctp-yellow);
-}
-
-.alert-caution {
-  border-left-color: var(--ctp-red);
-}
-
-.alert-caution .alert-heading {
-  color: var(--ctp-red);
-}
-
-/* Fallback for unhighlighted code blocks (dev mode without rehype) */
-pre:not(.shiki) {
-  padding: 1rem;
-  border-radius: 0.375rem;
-  overflow-x: auto;
-  font-size: 0.875rem;
-  line-height: 1.7;
-  background-color: var(--ctp-mantle);
-  color: var(--ctp-text);
-}

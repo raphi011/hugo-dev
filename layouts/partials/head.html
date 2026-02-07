@@ -4,19 +4,23 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 {{ with or .Description .Site.Params.description }}
 <meta name="description" content="{{ . }}">
 {{ end }}
 
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
-{{/* CSS: load pre-compiled Tailwind output, then minify and fingerprint via Hugo Pipes */}}
-{{ $css := resources.Get "css/compiled/main.css" }}
-{{ if $css }}
+{{/* Geist font (sans + mono) via Google Fonts */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap">
+
+{{/* CSS: process Tailwind source via Hugo's built-in css.TailwindCSS pipe */}}
+{{ with resources.Get "css/main.css" }}
+  {{ $css := . | css.TailwindCSS }}
   {{ $css = $css | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-{{ else }}
-  {{ warnf "Paper theme: css/compiled/main.css not found. Run 'npm run build:css' first." }}
 {{ end }}
 
 {{/* Custom CSS override hook */}}

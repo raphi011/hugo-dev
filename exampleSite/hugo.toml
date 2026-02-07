@@ -1,6 +1,10 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
 title = "Paper"
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
 
 # Theme is resolved via Hugo Modules
 [module]
@@ -18,12 +22,14 @@ title = "Paper"
   author = "Raphael Gruber"
   commitHash = ""
 
-  [params.social]
-    github = "https://github.com/raphi011"
-    linkedin = "https://linkedin.com/in/raphael-gruber-944300137"
-
-[taxonomies]
-  tag = "tags"
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/raphi011"
+    icon = "github.svg"
+  [[params.social]]
+    name = "LinkedIn"
+    url = "https://linkedin.com/in/raphael-gruber-944300137"
+    icon = "linkedin.svg"
 
 [markup]
   [markup.highlight]

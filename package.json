@@ -2,10 +2,9 @@
   "name": "hugo-dev",
   "private": true,
   "scripts": {
-    "build:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify",
     "build:highlight": "rehype exampleSite/public -o",
-    "build": "bun run build:css && HUGO_PARAMS_COMMITHASH=$(git rev-parse HEAD) hugo --source exampleSite && bun run build:highlight",
-    "dev:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --watch"
+    "build": "HUGO_PARAMS_COMMITHASH=$(git rev-parse HEAD) hugo --source exampleSite && bun run build:highlight",
+    "dev": "hugo server --source exampleSite"
   },
   "devDependencies": {
     "@shikijs/rehype": "^3.4.2",
