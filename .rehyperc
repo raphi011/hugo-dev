@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    ["@shikijs/rehype", {
+      "themes": {
+        "light": "catppuccin-latte",
+        "dark": "catppuccin-mocha"
+      },
+      "defaultColor": "light"
+    }]
+  ]
+}

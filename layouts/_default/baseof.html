@@ -9,5 +9,25 @@
       {{- block "main" . }}{{ end -}}
     </main>
     {{- partial "footer.html" . -}}
+    <script>
+    document.querySelectorAll('pre.shiki').forEach(function(pre) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'shiki-wrapper';
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      var btn = document.createElement('button');
+      btn.className = 'shiki-copy';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        navigator.clipboard.writeText(code.textContent).then(function() {
+          btn.textContent = 'Copied!';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+        });
+      });
+      wrapper.appendChild(btn);
+    });
+    </script>
   </body>
 </html>

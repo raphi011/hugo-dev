@@ -1,6 +1,6 @@
 {{ define "main" }}
-  <article class="prose prose-lg max-w-none">
-    <header class="not-prose mb-8">
+  <article class="prose max-w-none">
+    <header class="not-prose mb-4">
       <h1 class="text-3xl font-bold text-ctp-text">{{ .Title }}</h1>
       {{ if not .Date.IsZero }}
         <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
@@ -20,4 +20,5 @@
     </header>
     {{ .Content }}
   </article>
+  {{ partial "newsletter.html" . }}
 {{ end }}

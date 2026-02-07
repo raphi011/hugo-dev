@@ -25,3 +25,7 @@
   [[module.mounts]]
     source = "archetypes"
     target = "archetypes"
+
+[markup]
+  [markup.highlight]
+    codeFences = false
