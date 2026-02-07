@@ -1,0 +1,21 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "Paper"
+
+# Theme is resolved via Hugo Modules
+[module]
+  [[module.imports]]
+    path = "github.com/raphi011/hugo-dev"
+
+[menus]
+  [[menus.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menus.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
+
+[params]
+  description = "A clean, minimal Hugo theme"

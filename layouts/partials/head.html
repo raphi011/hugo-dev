@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+{{/* CSS: use Hugo Pipes to process the compiled Tailwind output */}}
+{{ $css := resources.Get "css/compiled/main.css" }}
+{{ if $css }}
+  {{ $css = $css | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{ end }}
+
+{{/* Custom CSS override hook */}}
+{{ $custom := resources.Get "css/custom.css" }}
+{{ if $custom }}
+  {{ $custom = $custom | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
+{{ end }}
+
+{{/* User-provided custom head hook */}}
+{{ if templates.Exists "partials/custom-head.html" }}
+  {{ partial "custom-head.html" . }}
+{{ end }}
+
+{{/* Favicons */}}
+{{ with .Site.Params.favicon }}
+  <link rel="icon" href="{{ . }}">
+{{ else }}
+  <link rel="icon" href="{{ "favicon.ico" | relURL }}">
+{{ end }}
+
+{{/* RSS */}}
+{{ range .AlternativeOutputFormats }}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end }}
+
+{{/* Canonical URL */}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Hugo built-in templates */}}
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ template "_internal/schema.html" . }}
