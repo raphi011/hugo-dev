@@ -133,7 +133,6 @@
   --tw-prose-body: var(--ctp-text);
   --tw-prose-headings: var(--ctp-text);
   --tw-prose-lead: var(--ctp-subtext1);
-  --tw-prose-links: var(--ctp-blue);
   --tw-prose-bold: var(--ctp-text);
   --tw-prose-counters: var(--ctp-subtext0);
   --tw-prose-bullets: var(--ctp-overlay1);
@@ -150,11 +149,12 @@
   --tw-prose-td-borders: var(--ctp-surface0);
 }
 
-/* Link styling: inherit text color, colored underline */
+/* Prose link styling: inherit parent text color, blue underline only */
 .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--ctp-blue);
+  text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
 
@@ -193,7 +193,15 @@ pre:not(.shiki) {
   line-height: 1.7;
 }
 
-/* Code block styling (syntax-highlighted) */
+/* Fallback styling for code blocks not processed by Shiki (extends shared base above) */
+pre:not(.shiki) {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--ctp-mantle);
+  color: var(--ctp-text);
+}
+
+/* Shiki-specific styling (padding, border, rounding) */
 .shiki {
   padding: 1rem 1rem 1rem 0;
   border-radius: 0.5rem;
@@ -308,12 +316,11 @@ pre:not(.shiki) {
 .alert-warning   { --alert-accent: var(--ctp-yellow); }
 .alert-caution   { --alert-accent: var(--ctp-red); }
 
-/* Social icon links */
+/* Social icon links (assumes black SVGs on transparent; inverted in dark mode) */
 .social-icon {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
-  border-radius: 0.25rem;
   background: var(--icon) center / contain no-repeat;
   opacity: 0.7;
   transition: opacity 0.15s;
@@ -329,10 +336,3 @@ pre:not(.shiki) {
   }
 }
 
-/* Fallback styling for code blocks not processed by Shiki */
-pre:not(.shiki) {
-  padding: 1rem;
-  border-radius: 0.375rem;
-  background-color: var(--ctp-mantle);
-  color: var(--ctp-text);
-}

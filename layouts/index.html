@@ -1,0 +1,68 @@
+{{ define "main" }}
+  {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
+
+  {{/* Writing section */}}
+  {{ $writing := where .Site.RegularPages "Section" "writing" }}
+  {{ with $writing }}
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4">
+        <a href="{{ "writing/" | relURL }}" class="text-ctp-text hover:text-ctp-blue transition-colors">
+          {{ i18n "writing_heading" | default "Writing" }}
+        </a>
+      </h2>
+      <div class="space-y-4">
+        {{ range first 5 . }}
+          <article>
+            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-sky transition-colors">
+              {{ .Title }}
+            </a>
+            {{ if not .Date.IsZero }}
+              <p class="text-sm text-ctp-subtext0">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">
+                  {{ .Date.Format "Jan 2, 2006" }}
+                </time>
+              </p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+      {{ if gt (len .) 5 }}
+        <p class="mt-4">
+          <a href="{{ "writing/" | relURL }}" class="text-sm text-ctp-blue hover:text-ctp-sky transition-colors">
+            {{ i18n "view_all_writing" | default "All posts" }} &rarr;
+          </a>
+        </p>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  {{/* Projects section */}}
+  {{ $projects := where .Site.RegularPages "Section" "projects" }}
+  {{ with $projects }}
+    <section>
+      <h2 class="text-xl font-semibold mb-4">
+        <a href="{{ "projects/" | relURL }}" class="text-ctp-text hover:text-ctp-blue transition-colors">
+          {{ i18n "projects_heading" | default "Projects" }}
+        </a>
+      </h2>
+      <div class="space-y-4">
+        {{ range sort . "Params.weight" }}
+          {{ $project := . }}
+          <article>
+            {{ with .Params.externalUrl }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
+                {{- $project.Title -}}
+                {{- partial "icon-external-link.html" (dict "size" "14") -}}
+              </a>
+            {{ else }}
+              <span class="text-ctp-blue">{{ $project.Title }}</span>
+            {{ end }}
+            {{ with .Description }}
+              <p class="text-sm text-ctp-subtext0">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
