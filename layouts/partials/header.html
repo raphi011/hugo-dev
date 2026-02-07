@@ -1,8 +1,32 @@
-<header>
-  <nav>
-    <a href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
-    {{ range .Site.Menus.main }}
-      <a href="{{ .URL }}">{{ .Name }}</a>
-    {{ end }}
+<header class="border-b border-ctp-surface0">
+  <nav class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="{{ .Site.Home.RelPermalink }}" class="text-lg font-semibold text-ctp-text hover:text-ctp-blue transition-colors">
+      {{ .Site.Title }}
+    </a>
+    <div class="flex items-center gap-4">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="text-sm text-ctp-subtext0 hover:text-ctp-text transition-colors">{{ .Name }}</a>
+      {{ end }}
+      {{ with .Site.Params.social }}
+        {{ with .github }}
+          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
+             style="--url:url(/github.svg)"
+             href="{{ . }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span class="sr-only">GitHub</span>
+          </a>
+        {{ end }}
+        {{ with .linkedin }}
+          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
+             style="--url:url(/linkedin.svg)"
+             href="{{ . }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
   </nav>
 </header>

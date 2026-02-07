@@ -1,15 +1,23 @@
 {{ define "main" }}
-  <article>
-    <header>
-      <h1>{{ .Title }}</h1>
+  <article class="prose prose-lg max-w-none">
+    <header class="not-prose mb-8">
+      <h1 class="text-3xl font-bold text-ctp-text">{{ .Title }}</h1>
       {{ if not .Date.IsZero }}
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "January 2, 2006" }}
-      </time>
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
+          {{ .Date.Format "Jan 2, 2006" }}
+        </time>
+      {{ end }}
+      {{ with .Params.tags }}
+        <div class="flex flex-wrap gap-1.5 mt-2">
+          {{ range . }}
+            <a href="{{ "tags/" | absURL }}{{ . | urlize }}/"
+               class="inline-block rounded-full bg-ctp-surface0 px-2.5 py-0.5 text-xs text-ctp-subtext0 hover:bg-ctp-surface1 hover:text-ctp-text transition-colors">
+              {{ . }}
+            </a>
+          {{ end }}
+        </div>
       {{ end }}
     </header>
-    <div>
-      {{ .Content }}
-    </div>
+    {{ .Content }}
   </article>
 {{ end }}

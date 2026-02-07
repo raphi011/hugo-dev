@@ -1,3 +1,8 @@
-<footer>
-  <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
+<footer class="border-t border-ctp-surface0">
+  <div class="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-ctp-overlay0">
+    &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
+    {{ with .Site.Params.commitHash }}
+      &middot; <span class="font-mono text-xs">{{ . | truncate 7 "" }}</span>
+    {{ end }}
+  </div>
 </footer>

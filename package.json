@@ -3,10 +3,14 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --minify",
+    "build:highlight": "rehype exampleSite/public -o",
+    "build": "bun run build:css && HUGO_PARAMS_COMMITHASH=$(git rev-parse HEAD) hugo --source exampleSite && bun run build:highlight",
     "dev:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/compiled/main.css --watch"
   },
   "devDependencies": {
+    "@shikijs/rehype": "^3.4.2",
     "@tailwindcss/cli": "^4.1.18",
-    "@tailwindcss/typography": "^0.5.19"
+    "@tailwindcss/typography": "^0.5.19",
+    "rehype-cli": "^12.0.1"
   }
 }

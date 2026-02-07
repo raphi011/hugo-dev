@@ -9,13 +9,22 @@ title = "Paper"
 
 [menus]
   [[menus.main]]
-    name = "Posts"
-    url = "/posts/"
-    weight = 10
-  [[menus.main]]
     name = "About"
     url = "/about/"
-    weight = 20
+    weight = 10
 
 [params]
-  description = "A clean, minimal Hugo theme"
+  description = "A clean, minimal Hugo theme for developers"
+  author = "Raphael Gruber"
+  commitHash = ""
+
+  [params.social]
+    github = "https://github.com/raphi011"
+    linkedin = "https://linkedin.com/in/raphael-gruber-944300137"
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.highlight]
+    codeFences = false
