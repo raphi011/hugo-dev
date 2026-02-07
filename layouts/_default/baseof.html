@@ -4,25 +4,34 @@
     {{- partial "head.html" . -}}
   </head>
   <body class="bg-ctp-base text-ctp-text min-h-screen flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-ctp-blue focus:px-3 focus:py-1 focus:text-ctp-base focus:text-sm">Skip to content</a>
     {{- partial "header.html" . -}}
-    <main class="flex-1 w-full max-w-3xl mx-auto px-4 py-8">
+    <main id="main-content" class="flex-1 w-full max-w-3xl mx-auto px-4 py-8">
       {{- block "main" . }}{{ end -}}
     </main>
     {{- partial "footer.html" . -}}
     <script>
     document.querySelectorAll('pre.shiki').forEach(function(pre) {
-      var wrapper = document.createElement('div');
+      const wrapper = document.createElement('div');
       wrapper.className = 'shiki-wrapper';
       pre.parentNode.insertBefore(wrapper, pre);
       wrapper.appendChild(pre);
 
-      var btn = document.createElement('button');
+      const btn = document.createElement('button');
       btn.className = 'shiki-copy';
       btn.textContent = 'Copy';
       btn.addEventListener('click', function() {
-        var code = pre.querySelector('code');
+        const code = pre.querySelector('code');
+        if (!navigator.clipboard) {
+          btn.textContent = 'Error';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+          return;
+        }
         navigator.clipboard.writeText(code.textContent).then(function() {
           btn.textContent = 'Copied!';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+        }).catch(function() {
+          btn.textContent = 'Error';
           setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
         });
       });

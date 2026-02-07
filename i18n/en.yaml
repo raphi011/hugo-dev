@@ -1,5 +1,11 @@
-# Keys used by Hugo's built-in pagination template (_internal/pagination.html)
+# Pagination
 prev_page:
   other: "Newer posts"
 next_page:
   other: "Older posts"
+
+# 404
+page_not_found:
+  other: "Page not found."
+back_home:
+  other: "Back home"

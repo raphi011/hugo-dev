@@ -1,6 +1,10 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
 title = "Paper"
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
 
 # Theme is resolved via Hugo Modules
 [module]
@@ -21,9 +25,6 @@ title = "Paper"
   [params.social]
     github = "https://github.com/raphi011"
     linkedin = "https://linkedin.com/in/raphael-gruber-944300137"
-
-[taxonomies]
-  tag = "tags"
 
 [markup]
   [markup.highlight]

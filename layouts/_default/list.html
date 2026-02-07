@@ -1,11 +1,12 @@
 {{ define "main" }}
+  {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
   {{ $paginator := .Paginator }}
   {{ if $paginator.Pages }}
     <div class="space-y-8">
       {{ range $paginator.Pages }}
         <article>
-          <h2 class="text-xl font-semibold font-pixel">
-            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-lavender transition-colors">
+          <h2 class="text-xl font-semibold">
+            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-sky transition-colors">
               {{ .Title }}
             </a>
           </h2>
@@ -18,13 +19,13 @@
       {{ end }}
     </div>
     {{ if gt $paginator.TotalPages 1 }}
-      <nav class="mt-8 flex items-center justify-center gap-4 text-sm">
+      <nav aria-label="Pagination" class="mt-8 flex items-center justify-center gap-4 text-sm">
         {{ if $paginator.HasPrev }}
-          <a href="{{ $paginator.Prev.URL }}" class="text-ctp-blue hover:underline">&larr; Newer</a>
+          <a href="{{ $paginator.Prev.URL }}" class="text-ctp-blue hover:underline">&larr; {{ i18n "prev_page" | default "Newer posts" }}</a>
         {{ end }}
-        <span class="text-ctp-overlay0">{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}</span>
+        <span class="text-ctp-overlay1">{{ $paginator.PageNumber }}/{{ $paginator.TotalPages }}</span>
         {{ if $paginator.HasNext }}
-          <a href="{{ $paginator.Next.URL }}" class="text-ctp-blue hover:underline">Older &rarr;</a>
+          <a href="{{ $paginator.Next.URL }}" class="text-ctp-blue hover:underline">{{ i18n "next_page" | default "Older posts" }} &rarr;</a>
         {{ end }}
       </nav>
     {{ end }}

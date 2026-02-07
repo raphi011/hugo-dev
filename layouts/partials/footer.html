@@ -1,5 +1,5 @@
-<footer class="border-t border-ctp-surface0">
-  <div class="max-w-3xl mx-auto px-4 py-6 flex items-center justify-between text-sm text-ctp-overlay0">
+<footer>
+  <div class="max-w-3xl mx-auto px-4 py-6 flex items-center justify-between text-sm text-ctp-overlay1">
     <div>
       &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
       {{ with .Site.Params.commitHash }}
@@ -9,20 +9,12 @@
     {{ with .Site.Params.social }}
       <div class="flex items-center gap-3">
         {{ with .github }}
-          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
-             style="--url:url(/github.svg)"
-             href="{{ . }}"
-             target="_blank"
-             rel="noopener noreferrer">
+          <a class="social-icon" style="--icon:url(/github.svg)" href="{{ . }}" target="_blank" rel="noopener noreferrer">
             <span class="sr-only">GitHub</span>
           </a>
         {{ end }}
         {{ with .linkedin }}
-          <a class="inline-block h-5 w-5 [background:var(--url)_center/contain_no-repeat] dark:invert opacity-70 hover:opacity-100 transition-opacity"
-             style="--url:url(/linkedin.svg)"
-             href="{{ . }}"
-             target="_blank"
-             rel="noopener noreferrer">
+          <a class="social-icon" style="--icon:url(/linkedin.svg)" href="{{ . }}" target="_blank" rel="noopener noreferrer">
             <span class="sr-only">LinkedIn</span>
           </a>
         {{ end }}

@@ -1,9 +1,6 @@
 ---
 title: "Building a REST API in Go"
 date: 2026-02-05
-tags:
-  - go
-  - tutorial
 description: "A comprehensive guide to building production-ready REST APIs with Go's standard library."
 ---
 
