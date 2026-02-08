@@ -11,6 +11,8 @@ projects_heading:
   other: "Projects"
 view_all_writing:
   other: "All posts"
+opens_new_tab:
+  other: "(opens in new tab)"
 
 # 404
 page_not_found:

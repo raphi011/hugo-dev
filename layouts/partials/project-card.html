@@ -7,6 +7,7 @@
     <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
       {{- $project.Title -}}
       {{- partial "icon-external-link.html" (dict "size" $iconSize) -}}
+      <span class="sr-only">{{ i18n "opens_new_tab" | default "(opens in new tab)" }}</span>
     </a>
   {{ else }}
     <span class="text-ctp-blue">{{ $project.Title }}</span>

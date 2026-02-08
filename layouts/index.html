@@ -3,7 +3,7 @@
 
   {{/* Writing section — section name and post count are configurable via site params */}}
   {{ $writingSection := .Site.Params.writingSection | default "writing" }}
-  {{ $postCount := .Site.Params.homepagePostCount | default 5 }}
+  {{ $postCount := .Site.Params.homepagePostCount | default 5 | int }}
   {{ $writing := where .Site.RegularPages "Section" $writingSection }}
   {{ with $writing }}
     <section class="mb-12">
