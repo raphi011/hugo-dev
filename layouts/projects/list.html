@@ -5,22 +5,7 @@
   {{ with $projects }}
     <div class="space-y-6">
       {{ range sort . "Params.weight" }}
-        {{ $project := . }}
-        <article>
-          <h2 class="text-xl font-semibold">
-            {{ with .Params.externalUrl }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
-                {{- $project.Title -}}
-                {{- partial "icon-external-link.html" (dict "size" "16") -}}
-              </a>
-            {{ else }}
-              <span class="text-ctp-blue">{{ $project.Title }}</span>
-            {{ end }}
-          </h2>
-          {{ with .Description }}
-            <p class="text-ctp-subtext0">{{ . }}</p>
-          {{ end }}
-        </article>
+        {{ partial "project-card.html" (dict "project" .) }}
       {{ end }}
     </div>
   {{ end }}

@@ -333,23 +333,19 @@ pre:not(.shiki) {
 .alert-warning   { --alert-accent: var(--ctp-yellow); }
 .alert-caution   { --alert-accent: var(--ctp-red); }
 
-/* Social icon links (assumes black SVGs on transparent; inverted in dark mode) */
+/* Social icon links — uses mask-image so color follows the theme automatically */
 .social-icon {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
-  background: var(--icon) center / contain no-repeat;
+  background-color: var(--ctp-text);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
   opacity: 0.7;
   transition: opacity 0.15s;
 }
 
 .social-icon:hover {
   opacity: 1;
-}
-
-@media (prefers-color-scheme: dark) {
-  .social-icon {
-    filter: invert(1);
-  }
 }
 
