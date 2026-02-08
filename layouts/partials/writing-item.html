@@ -1,11 +1,11 @@
 {{- $page := .page -}}
 {{- $headingLevel := .headingLevel | default "h2" -}}
 <article>
-  <{{ $headingLevel }}>
+  {{ printf "<%s>" $headingLevel | safeHTML }}
     <a href="{{ $page.RelPermalink }}" class="text-ctp-blue hover:text-ctp-sky transition-colors">
       {{- $page.Title -}}
     </a>
-  </{{ $headingLevel }}>
+  {{ printf "</%s>" $headingLevel | safeHTML }}
   {{ if not $page.Date.IsZero }}
     <p class="text-sm text-ctp-subtext0">
       <time datetime="{{ $page.Date.Format "2006-01-02" }}">
