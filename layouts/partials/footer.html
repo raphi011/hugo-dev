@@ -1,9 +1,12 @@
 <footer>
   <div class="max-w-3xl mx-auto px-4 py-6 flex items-center justify-between text-sm text-ctp-overlay1">
     <div>
-      &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
       {{ with .Site.Params.commitHash }}
-        &middot; <span class="font-mono text-xs">{{ . | truncate 7 "" }}</span>
+        <span class="commit-tooltip" tabindex="0" data-commit="{{ . | truncate 7 "" }}">
+          &copy; {{ now.Year }} {{ with $.Site.Params.author }}{{ . }}{{ else }}{{ $.Site.Title }}{{ end }}
+        </span>
+      {{ else }}
+        &copy; {{ now.Year }} {{ with .Site.Params.author }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}
       {{ end }}
     </div>
     {{ with .Site.Params.social }}

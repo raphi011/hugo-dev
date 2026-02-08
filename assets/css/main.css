@@ -354,3 +354,33 @@ pre:not(.shiki) {
   opacity: 1;
 }
 
+/* Commit hash tooltip on copyright text */
+.commit-tooltip {
+  position: relative;
+  cursor: default;
+}
+
+.commit-tooltip::after {
+  content: attr(data-commit);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  background-color: var(--ctp-surface0);
+  color: var(--ctp-subtext1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  margin-bottom: 0.25rem;
+}
+
+.commit-tooltip:hover::after,
+.commit-tooltip:focus::after {
+  opacity: 1;
+}
+
