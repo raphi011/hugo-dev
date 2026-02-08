@@ -1,9 +1,8 @@
 {{ define "main" }}
   {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
 
-  {{ $projects := .RegularPages }}
-  {{ with $projects }}
-    <h1 class="text-xl font-semibold mb-4">{{ $.Title }}</h1>
+  <h1 class="text-xl font-semibold mb-4">{{ .Title }}</h1>
+  {{ with .RegularPages }}
     <div class="space-y-4">
       {{ range sort . "Params.weight" }}
         {{ partial "project-card.html" (dict "project" . "compact" true) }}

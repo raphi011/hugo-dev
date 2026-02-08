@@ -1,11 +1,11 @@
 {{ define "main" }}
   {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
+  <h1 class="text-xl font-semibold mb-4">{{ .Title }}</h1>
   {{ $paginator := .Paginator }}
   {{ if $paginator.Pages }}
-    <h1 class="text-xl font-semibold mb-4">{{ .Title }}</h1>
     <div class="space-y-4">
       {{ range $paginator.Pages }}
-        {{ partial "writing-item.html" . }}
+        {{ partial "writing-item.html" (dict "page" . "headingLevel" "h2") }}
       {{ end }}
     </div>
     {{ if gt $paginator.TotalPages 1 }}
