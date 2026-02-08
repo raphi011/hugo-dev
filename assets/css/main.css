@@ -2,6 +2,22 @@
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/GeistVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMonoVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
  * Catppuccin color palette
  * Light: Latte — Dark: Mocha
