@@ -166,13 +166,18 @@
   --tw-prose-td-borders: var(--ctp-surface0);
 }
 
-/* Prose link styling: inherit parent text color, blue underline only */
+/* Prose link styling: inherit parent text color, styled with blue underline */
 .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--ctp-blue);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s;
+}
+
+.prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)):hover {
+  text-decoration-color: var(--ctp-sky);
 }
 
 /* Inline code styling */
@@ -201,7 +206,7 @@
   }
 }
 
-/* Shared code block base */
+/* Code block base (shared properties) */
 .shiki,
 pre:not(.shiki) {
   font-family: var(--font-mono);
@@ -210,19 +215,19 @@ pre:not(.shiki) {
   line-height: 1.7;
 }
 
-/* Fallback styling for code blocks not processed by Shiki (extends shared base above) */
+/* Shiki-specific styling */
+.shiki {
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ctp-surface0);
+}
+
+/* Non-Shiki code block styling */
 pre:not(.shiki) {
   padding: 1rem;
   border-radius: 0.375rem;
   background-color: var(--ctp-mantle);
   color: var(--ctp-text);
-}
-
-/* Shiki-specific styling (padding, border, rounding) */
-.shiki {
-  padding: 1rem 1rem 1rem 0;
-  border-radius: 0.5rem;
-  border: 1px solid var(--ctp-surface0);
 }
 
 /* Line numbers via CSS counters */
@@ -266,13 +271,13 @@ pre:not(.shiki) {
   opacity: 1;
 }
 
-/* Tighter prose spacing */
+/* Remove default list item margins in prose */
 .prose :where(li):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-/* Heading color hierarchy (components layer so utility classes can still override) */
+/* Heading overrides (color + spacing) in components layer so utility classes can still win */
 @layer components {
   .prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-top: 1.25em;

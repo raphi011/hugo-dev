@@ -11,7 +11,7 @@
 
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
-{{/* CSS: Deferred so Tailwind runs after hugo_stats.json is complete */}}
+{{/* CSS: template deferred so hugo_stats.json is fully built before Tailwind processes it */}}
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ with resources.Get "css/main.css" }}
     {{ $css := . | css.TailwindCSS }}
@@ -20,10 +20,8 @@
   {{ end }}
 
   {{/* Custom CSS override hook */}}
-  {{ $custom := resources.Get "css/custom.css" }}
-  {{ if $custom }}
-    {{ $custom = $custom | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
+  {{ with resources.Get "css/custom.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
   {{ end }}
 {{ end }}
 
