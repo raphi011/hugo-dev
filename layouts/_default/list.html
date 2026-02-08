@@ -2,7 +2,7 @@
   {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
   {{ $paginator := .Paginator }}
   {{ if $paginator.Pages }}
-    <h2 class="text-xl font-semibold mb-4">{{ .Title }}</h2>
+    <h1 class="text-xl font-semibold mb-4">{{ .Title }}</h1>
     <div class="space-y-4">
       {{ range $paginator.Pages }}
         {{ partial "writing-item.html" . }}

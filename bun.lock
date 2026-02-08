@@ -4,9 +4,6 @@
   "workspaces": {
     "": {
       "name": "hugo-dev",
-      "dependencies": {
-        "tailwindcss": "^4.1.18",
-      },
       "devDependencies": {
         "@shikijs/rehype": "^3.4.2",
         "@tailwindcss/cli": "^4.1.18",

@@ -3,7 +3,7 @@
 
   {{ $projects := .RegularPages }}
   {{ with $projects }}
-    <h2 class="text-xl font-semibold mb-4">{{ $.Title }}</h2>
+    <h1 class="text-xl font-semibold mb-4">{{ $.Title }}</h1>
     <div class="space-y-4">
       {{ range sort . "Params.weight" }}
         {{ partial "project-card.html" (dict "project" . "compact" true) }}
