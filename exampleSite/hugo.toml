@@ -38,6 +38,10 @@ enableRobotsTXT = true
     name = "RSS"
     url = "/index.xml"
     icon = "rss.svg"
+  [[params.social]]
+    name = "Email"
+    url = "mailto:your@email.com"
+    icon = "mail.svg"
 
 [markup]
   [markup.highlight]
