@@ -1,0 +1,18 @@
+{{- $project := .project -}}
+{{- $compact := .compact | default false -}}
+{{- $iconSize := cond $compact "14" "16" -}}
+<article>
+  {{- if not $compact }}<h2 class="text-xl font-semibold">{{ end -}}
+  {{ with $project.Params.externalUrl }}
+    <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
+      {{- $project.Title -}}
+      {{- partial "icon-external-link.html" (dict "size" $iconSize) -}}
+    </a>
+  {{ else }}
+    <span class="text-ctp-blue">{{ $project.Title }}</span>
+  {{ end -}}
+  {{- if not $compact }}</h2>{{ end }}
+  {{ with $project.Description }}
+    <p class="{{ if $compact }}text-sm {{ end }}text-ctp-subtext0">{{ . }}</p>
+  {{ end }}
+</article>

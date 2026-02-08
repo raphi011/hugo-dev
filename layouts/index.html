@@ -50,20 +50,7 @@
       </h2>
       <div class="space-y-4">
         {{ range sort . "Params.weight" }}
-          {{ $project := . }}
-          <article>
-            {{ with .Params.externalUrl }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
-                {{- $project.Title -}}
-                {{- partial "icon-external-link.html" (dict "size" "14") -}}
-              </a>
-            {{ else }}
-              <span class="text-ctp-blue">{{ $project.Title }}</span>
-            {{ end }}
-            {{ with .Description }}
-              <p class="text-sm text-ctp-subtext0">{{ . }}</p>
-            {{ end }}
-          </article>
+          {{ partial "project-card.html" (dict "project" . "compact" true) }}
         {{ end }}
       </div>
     </section>
