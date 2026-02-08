@@ -30,6 +30,10 @@ enableRobotsTXT = true
     name = "LinkedIn"
     url = "https://linkedin.com/in/raphael-gruber-944300137"
     icon = "linkedin.svg"
+  [[params.social]]
+    name = "RSS"
+    url = "/index.xml"
+    icon = "rss.svg"
 
 [markup]
   [markup.highlight]
