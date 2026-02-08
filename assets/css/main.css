@@ -268,8 +268,8 @@ pre:not(.shiki) {
 
 /* Tighter prose spacing */
 .prose :where(li):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Heading color hierarchy (components layer so utility classes can still override) */

@@ -3,6 +3,10 @@ languageCode = "en-us"
 title = "Paper"
 enableRobotsTXT = true
 
+[build]
+  [build.buildStats]
+    enable = true
+
 [pagination]
   pagerSize = 10
 
