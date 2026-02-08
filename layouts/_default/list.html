@@ -2,20 +2,10 @@
   {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
   {{ $paginator := .Paginator }}
   {{ if $paginator.Pages }}
-    <div class="space-y-8">
+    <h2 class="text-xl font-semibold mb-4">{{ .Title }}</h2>
+    <div class="space-y-4">
       {{ range $paginator.Pages }}
-        <article>
-          <h2 class="text-xl font-semibold">
-            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-sky transition-colors">
-              {{ .Title }}
-            </a>
-          </h2>
-          {{ if not .Date.IsZero }}
-            <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
-              {{ .Date.Format "Jan 2, 2006" }}
-            </time>
-          {{ end }}
-        </article>
+        {{ partial "writing-item.html" . }}
       {{ end }}
     </div>
     {{ if gt $paginator.TotalPages 1 }}

@@ -14,18 +14,7 @@
       </h2>
       <div class="space-y-4">
         {{ range first $postCount . }}
-          <article>
-            <a href="{{ .RelPermalink }}" class="text-ctp-blue hover:text-ctp-sky transition-colors">
-              {{ .Title }}
-            </a>
-            {{ if not .Date.IsZero }}
-              <p class="text-sm text-ctp-subtext0">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">
-                  {{ .Date.Format "Jan 2, 2006" }}
-                </time>
-              </p>
-            {{ end }}
-          </article>
+          {{ partial "writing-item.html" . }}
         {{ end }}
       </div>
       {{ if gt (len .) $postCount }}

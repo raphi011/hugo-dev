@@ -3,9 +3,10 @@
 
   {{ $projects := .RegularPages }}
   {{ with $projects }}
-    <div class="space-y-6">
+    <h2 class="text-xl font-semibold mb-4">{{ $.Title }}</h2>
+    <div class="space-y-4">
       {{ range sort . "Params.weight" }}
-        {{ partial "project-card.html" (dict "project" .) }}
+        {{ partial "project-card.html" (dict "project" . "compact" true) }}
       {{ end }}
     </div>
   {{ end }}

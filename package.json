@@ -11,5 +11,8 @@
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "rehype-cli": "^12.0.1"
+  },
+  "dependencies": {
+    "tailwindcss": "^4.1.18"
   }
 }
