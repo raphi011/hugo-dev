@@ -20,8 +20,9 @@
   {{ end }}
 
   {{/* Custom CSS override hook */}}
-  {{ with resources.Get "css/custom.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ with resources.Get "css/custom.css" }}
+    {{ $custom := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}">
   {{ end }}
 {{ end }}
 
