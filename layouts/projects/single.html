@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <article class="prose max-w-none">
+    <header class="not-prose mb-6">
+      <h1 class="text-4xl font-bold text-ctp-blue">{{ .Title }}</h1>
+      {{ with .Description }}
+        <p class="text-lg text-ctp-subtext0 mt-2">{{ . }}</p>
+      {{ end }}
+      {{ if not .Date.IsZero }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-sm text-ctp-subtext0">
+          {{ .Date.Format "Jan 2, 2006" }}
+        </time>
+      {{ end }}
+      {{ with .Params.externalUrl }}
+        <div class="mt-3">
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-sm text-ctp-blue hover:text-ctp-sky transition-colors inline-flex items-center gap-1">
+            {{- partial "icon-external-link.html" (dict "size" "14") -}}
+            {{ T "view_project" | default "View project" }}
+          </a>
+        </div>
+      {{ end }}
+    </header>
+    {{ .Content }}
+  </article>
+{{ end }}

@@ -4,8 +4,6 @@ description: "A clean, minimal Hugo theme for developers. Built with Tailwind CS
 externalUrl: "https://github.com/raphi011/paper"
 weight: 10
 date: 2026-01-01
-build:
-  render: "never"
 ---
 
 Paper is a Hugo theme designed for developer blogs. It focuses on readability and clean typography, with automatic light/dark mode using the Catppuccin color palette.
