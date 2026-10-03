@@ -1,5 +1,13 @@
 // Ledger theme: progressive enhancements only. The site works fully without JS.
 (() => {
+  // Reading progress: only on pages with at least a viewport of scrolling
+  const progress = document.querySelector(".progress");
+  if (progress) {
+    addEventListener("load", () => {
+      progress.hidden = document.documentElement.scrollHeight < 2 * innerHeight;
+    });
+  }
+
   // Copy buttons on code blocks
   if (!navigator.clipboard) return;
   document.querySelectorAll(".code-block").forEach((block) => {
