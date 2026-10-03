@@ -2,9 +2,6 @@
   <div class="wrap">
     <span>© {{ now.Year }} {{ site.Params.author | default site.Title }}</span>
     <nav aria-label="Elsewhere">
-      {{- with site.Home.OutputFormats.Get "rss" }}
-      <a class="foot-link" href="{{ .RelPermalink }}">rss</a>
-      {{- end }}
       {{- range site.Params.social }}
       <a class="foot-link" href="{{ .url }}"{{ if .rel }} rel="{{ .rel }}"{{ else }} rel="me noopener"{{ end }}>{{ .name }}</a>
       {{- end }}
