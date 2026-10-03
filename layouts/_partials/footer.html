@@ -3,7 +3,7 @@
     <span>© {{ now.Year }} {{ site.Params.author | default site.Title }}</span>
     <nav aria-label="Elsewhere">
       {{- range site.Params.social }}
-      <a class="foot-link" href="{{ .url }}"{{ if .rel }} rel="{{ .rel }}"{{ else }} rel="me noopener"{{ end }}>{{ .name }}</a>
+      <a class="foot-link" href="{{ .url }}"{{ if .rel }} rel="{{ .rel }}"{{ else }} rel="me noopener"{{ end }}>{{ partial "icon.html" (lower .name) }}{{ .name }}</a>
       {{- end }}
       {{- if site.Params.showPoweredBy }}
       <a class="foot-link" href="https://gohugo.io">{{ i18n "built_with_hugo" }}</a>
