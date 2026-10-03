@@ -9,7 +9,7 @@ A quiet Hugo theme for developer blogs. Ledger follows the reader's OS light/dar
 - Subtle motion: staggered fade-in, a caret in the logo that blinks on hover, sliding underlines, a reading-progress bar and cross-page view transitions where the browser supports them. All of it switches off under `prefers-reduced-motion`
 - Code blocks highlighted by Hugo's built-in highlighter, with a filename/language header, a copy button, line highlighting, line numbers, and syntax colours that follow the theme
 - GitHub-style alerts (`> [!NOTE]`)
-- Posts grouped by year, a featured "latest" post, optional tags, an optional table of contents, prev/next links, RSS, Open Graph and Twitter cards
+- Posts grouped by year, a featured "latest" post, optional tags, an optional table of contents, prev/next links, RSS, Open Graph and Twitter cards, JSON-LD article data
 - Self-hosted fonts: Bricolage Grotesque (headings), Newsreader (body), JetBrains Mono (meta & code). All are SIL OFL
 - UI strings are translatable via `i18n/`
 

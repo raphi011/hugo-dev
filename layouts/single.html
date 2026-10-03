@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{- $isPost := and (in site.MainSections .Section) (not .Params.hideMeta) }}
-{{- if $isPost }}<div class="progress" aria-hidden="true"></div>{{ end }}
+{{- if $isPost }}<div class="progress" aria-hidden="true" hidden></div>{{ end }}
 
 <article{{ if not $isPost }} class="is-page"{{ end }}>
   <header class="article-header rise">
