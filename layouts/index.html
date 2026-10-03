@@ -24,7 +24,7 @@
 <section class="featured rise" style="--d: 120ms" aria-label="{{ i18n "latest" }}">
   <a class="post-row" href="{{ .RelPermalink }}">
     <span class="eyebrow">{{ i18n "latest" }}<span class="rule" aria-hidden="true"></span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format site.Params.dateFormat }}</time></span>
-    <span class="post-title" style="view-transition-name: t-{{ substr (md5 .RelPermalink) 0 12 }}">{{ .LinkTitle }}</span>
+    <span class="post-title">{{ .LinkTitle }}</span>
     {{- $summary := .Description | default (.Summary | plainify | htmlUnescape | truncate 200) }}
     {{- with $summary }}<span class="summary">{{ . }}</span>{{ end }}
     <span class="arrow">{{ i18n "read_post" }} →</span>

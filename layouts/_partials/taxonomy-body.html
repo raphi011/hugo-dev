@@ -33,7 +33,7 @@
     <h2 class="year"><a class="tag-name" href="{{ .Page.RelPermalink }}"><span class="hash">#</span>{{ .Page.Data.Term | default .Name }}</a></h2>
     <ol class="post-list">
       {{- range .Pages.ByDate.Reverse }}
-      <li>{{ partial "post-row.html" (dict "page" . "fmt" site.Params.tagDateFormat "vt" false) }}</li>
+      <li>{{ partial "post-row.html" (dict "page" . "fmt" site.Params.tagDateFormat) }}</li>
       {{- end }}
     </ol>
   </div>

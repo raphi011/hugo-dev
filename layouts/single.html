@@ -19,7 +19,7 @@
       {{- end }}
     </p>
     {{- end }}
-    <h1 class="article-title"{{ if $isPost }} style="view-transition-name: t-{{ substr (md5 .RelPermalink) 0 12 }}"{{ end }}>{{ .Params.heading | default .Title }}</h1>
+    <h1 class="article-title">{{ .Params.heading | default .Title }}</h1>
     {{- with and (site.GetPage "/tags") (.GetTerms "tags") }}
     <ul class="tags" aria-label="Tags">
       {{- range . }}
