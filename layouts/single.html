@@ -58,10 +58,10 @@
     <h2 class="year" id="links-heading">{{ $.Params.linksTitle | default (i18n "links_title") }}</h2>
     <ul class="link-grid">
       {{- range . }}
-      <li><a class="link-row" href="{{ .url }}"{{ if hasPrefix .url "http" }} rel="me noopener"{{ end }}><span class="label">{{ .name }}</span><span class="out" aria-hidden="true">↗</span></a></li>
+      <li><a class="link-row" href="{{ .url }}"{{ if hasPrefix .url "http" }} rel="me noopener"{{ end }}><span class="label">{{ partial "icon.html" (lower .name) }}{{ .name }}</span><span class="out" aria-hidden="true">↗</span></a></li>
       {{- end }}
       {{- if $.Params.showSocial }}{{ with site.Home.OutputFormats.Get "rss" }}
-      <li><a class="link-row" href="{{ .RelPermalink }}"><span class="label">rss</span><span class="out" aria-hidden="true">↗</span></a></li>
+      <li><a class="link-row" href="{{ .RelPermalink }}"><span class="label">{{ partial "icon.html" "rss" }}rss</span><span class="out" aria-hidden="true">↗</span></a></li>
       {{- end }}{{ end }}
     </ul>
   </section>

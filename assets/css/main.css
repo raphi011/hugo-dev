@@ -431,6 +431,7 @@ main { flex: 1 0 auto; }
 .link-row:hover { color: var(--ink); }
 .link-row .label,
 .link-row .out { transition: color .2s ease, transform .35s var(--ease-out); }
+.link-row .label { display: inline-flex; align-items: center; gap: 10px; }
 .link-row .out { color: var(--muted); }
 @media (hover: hover) {
   .link-row:hover .label { color: var(--accent); transform: translateX(4px); }
@@ -828,7 +829,7 @@ div.chroma { overflow-x: auto; }
   font-size: 13px;
 }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
-.foot-link { padding: 12px 0; color: var(--muted); text-decoration: none; transition: color .2s ease; }
+.foot-link { display: inline-flex; align-items: center; gap: 7px; padding: 12px 0; color: var(--muted); text-decoration: none; transition: color .2s ease; }
 .foot-link:hover { color: var(--ink); }
 .site-footer .made { padding: 12px 0; }
 

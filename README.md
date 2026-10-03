@@ -66,7 +66,7 @@ See `exampleSite/hugo.toml` for a complete configuration example. The defaults b
 | `params.homePostCount` | `12` | How many posts appear under the featured one on the home page |
 | `params.dateFormat` / `params.listDateFormat` | `Jan 2, 2006` / `Jan 2` | Date formats |
 | `params.showLastmod` | `false` | Shows "updated …" on posts |
-| `params.social` | — | List of `{name, url}` for the footer |
+| `params.social` | — | List of `{name, url}` for the footer. `github`, `linkedin` and `email` get an icon |
 | `params.showRssInNav`, `params.showPoweredBy` | `true` | |
 | `params.tagIndex` | `true` | The tags page lists every tag with its posts, under the tag pills |
 | `params.tagDateFormat` | `Jan 2006` | Date format in the tag index |
