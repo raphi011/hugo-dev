@@ -1,0 +1,33 @@
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light dark;
+
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Newsreader", Charter, "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 760px;
+  --gutter: 24px;
+  --radius: 10px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+
+  /* light */
+  --bg: #FAFAF9;
+  --surface: #F2F2EF;
+  --ink: #17181C;
+  --muted: #5D5F67;
+  --line: #E3E3DF;
+  --accent: #2F5BD3;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --dot: rgba(23, 24, 28, .10);
+
+  /* syntax */
+  --c-kw: var(--accent);
+  --c-fn: #A63D8F;
+  --c-str: #2C7A4B;
+  --c-num: #B0531A;
+  --c-com: var(--muted);
+  --c-punct: var(--muted);
+  --c-del: #B93232;
+  --c-hl: color-mix(in srgb, var(--accent) 8%, transparent);
+}

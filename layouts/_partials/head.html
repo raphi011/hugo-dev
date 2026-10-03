@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{- $desc := "" }}
+{{- with .Description }}{{ $desc = . }}{{ else }}{{ if and .IsPage .Summary }}{{ $desc = .Summary | plainify | htmlUnescape | truncate 160 }}{{ else }}{{ $desc = site.Params.description }}{{ end }}{{ end }}
+{{- with $desc }}
+<meta name="description" content="{{ . }}">
+{{- end }}
+{{- with site.Params.author }}
+<meta name="author" content="{{ . }}">
+{{- end }}
+<meta name="color-scheme" content="light dark">
+{{- $bg := site.Params.style.bg }}
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ $bg | default "#FAFAF9" }}">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ site.Params.style.dark.bg | default "#0F1013" }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- with site.Params.favicon }}
+<link rel="icon" href="{{ . }}">
+{{- else }}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+{{- end }}
+
+{{- /* Preload the two faces visible above the fold */}}
+<link rel="preload" href="{{ "fonts/bricolage-grotesque.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/newsreader.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+
+{{- $css := resources.Get "css/main.css" | css.Build (dict "minify" true "vars" site.Params.style "externals" (slice "../fonts/*")) }}
+{{- with resources.Get "css/custom.css" }}{{ $css = slice $css . | resources.Concat "css/main.css" }}{{ end }}
+{{- $css = $css | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- else }}{{ with site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}{{ end }}
+
+{{ partial "opengraph.html" . }}
+{{ partial "twitter_cards.html" . }}
+{{- if and .IsPage (in site.MainSections .Section) }}
+{{ partial "schema.html" . }}
+{{- end }}
+
+{{- /* User-provided custom head hook */}}
+{{- if templates.Exists "_partials/custom-head.html" }}
+{{ partial "custom-head.html" . }}
+{{- end }}

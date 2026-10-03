@@ -1,0 +1,17 @@
+/* ---------- Tokens: dark (imported under prefers-color-scheme: dark) ---------- */
+:root {
+  --bg: #0F1013;
+  --surface: #16181C;
+  --ink: #E7E7E4;
+  --muted: #9B9DA6;
+  --line: #26282E;
+  --accent: #8EA8FF;
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --dot: rgba(231, 231, 228, .08);
+
+  --c-fn: #E59BD3;
+  --c-str: #8DD3A6;
+  --c-num: #F0A36B;
+  --c-del: #F28B82;
+  --c-hl: color-mix(in srgb, var(--accent) 10%, transparent);
+}

@@ -1,13 +1,13 @@
 # https://github.com/gohugoio/hugoThemes#themetoml
 
-name = "Paper"
+name = "Ledger"
 license = "MIT"
 licenselink = "https://github.com/raphi011/hugo-dev/blob/main/LICENSE"
-description = "A clean, minimal Hugo theme"
+description = "A quiet, polished developer blog theme: follows the OS light/dark setting, fully responsive, subtle motion, self-hosted fonts, no framework."
 homepage = "https://github.com/raphi011/hugo-dev"
-tags = ["blog", "minimal", "clean", "responsive", "dark mode"]
-features = ["blog", "dark mode"]
-min_version = "0.145.0"
+tags = ["blog", "minimal", "dark mode", "responsive", "developer"]
+features = ["auto dark mode", "syntax highlighting", "reading progress", "view transitions", "RSS", "tags"]
+min_version = "0.161.0"
 
 [author]
   name = "raphi011"

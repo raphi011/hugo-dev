@@ -1,14 +1,7 @@
 baseURL = "https://example.org/"
-languageCode = "en-us"
-title = "Paper"
+locale = "en-us"
+title = "Ledger"
 enableRobotsTXT = true
-
-[build]
-  [build.buildStats]
-    enable = true
-
-[pagination]
-  pagerSize = 10
 
 # Theme is resolved via Hugo Modules
 [module]
@@ -17,32 +10,61 @@ enableRobotsTXT = true
 
 [menus]
   [[menus.main]]
-    name = "About"
-    url = "/about/"
+    name = "writing"
+    pageRef = "/writing"
     weight = 10
+  [[menus.main]]
+    name = "tags"
+    pageRef = "/tags"
+    weight = 20
+  [[menus.main]]
+    name = "about"
+    pageRef = "/about"
+    weight = 30
 
 [params]
-  description = "A clean, minimal Hugo theme for developers"
+  description = "A quiet Hugo theme for developer blogs"
   author = "Raphael Gruber"
-  commitHash = ""
+  brand = "ledger"         # shown in the header…
+  brandSuffix = ".dev"     # …followed by this, in the accent colour
+  homePostCount = 12       # posts listed under the featured one on the home page
+  dateFormat = "Jan 2, 2006"
+  listDateFormat = "Jan 2"
+  showLastmod = false
+  showRssInNav = true
+  showPoweredBy = true
+
+  # Override the theme's CSS tokens (see assets/css/tokens.css); `dark` applies in dark mode
+  # [params.style]
+  #   accent = "#0F766E"
+  #   [params.style.dark]
+  #     accent = "#5EEAD4"
+
+  [params.intro]
+    kicker = "// backend engineer · vienna"
+    title = "Notes on ledgers, event streams and the quiet parts that keep money moving."
+    text = "I write about Kotlin, Postgres and Kafka — mostly the lessons that only show up in production."
 
   [[params.social]]
-    name = "GitHub"
+    name = "github"
     url = "https://github.com/raphi011"
-    icon = "github.svg"
   [[params.social]]
-    name = "LinkedIn"
+    name = "linkedin"
     url = "https://linkedin.com/in/raphael-gruber-944300137"
-    icon = "linkedin.svg"
   [[params.social]]
-    name = "RSS"
-    url = "/index.xml"
-    icon = "rss.svg"
-  [[params.social]]
-    name = "Email"
+    name = "email"
     url = "mailto:your@email.com"
-    icon = "mail.svg"
+
+[taxonomies]
+  tag = "tags"
 
 [markup]
   [markup.highlight]
-    codeFences = false
+    noClasses = false      # the theme colours code from CSS variables (light + dark)
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

@@ -1,0 +1,22 @@
+<header class="site-header wrap">
+  <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}">
+    {{- site.Params.brand | default site.Title -}}
+    {{- with site.Params.brandSuffix }}<span class="brand-suffix">{{ . }}</span>{{ end -}}
+    <span class="caret" aria-hidden="true"></span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    {{- $current := . }}
+    {{- range site.Menus.main }}
+      {{- $active := false }}
+      {{- $exact := false }}
+      {{- if ne .URL "/" }}{{ $active = hasPrefix $current.RelPermalink .URL }}{{ end }}
+      {{- $exact = eq $current.RelPermalink .URL }}
+      <a class="nav-link{{ if $active }} is-active{{ end }}" href="{{ .URL }}"{{ if $exact }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+    {{- if site.Params.showRssInNav }}
+      {{- with site.Home.OutputFormats.Get "rss" }}
+      <a class="nav-link" href="{{ .RelPermalink }}" aria-label="{{ i18n "rss_feed" }}">{{ partial "icon.html" "rss" }}</a>
+      {{- end }}
+    {{- end }}
+  </nav>
+</header>

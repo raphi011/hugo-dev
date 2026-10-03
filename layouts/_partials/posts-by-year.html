@@ -1,0 +1,13 @@
+{{- /* Context: a Pages collection. Renders posts grouped by year, newest first. */ -}}
+{{- $i := 0 }}
+{{- range .GroupByDate "2006" }}
+<div class="year-group">
+  <h2 class="year">{{ .Key }}</h2>
+  <ol class="post-list">
+    {{- range .Pages }}
+    {{- $i = add $i 1 }}
+    <li style="--i: {{ $i }}">{{ partial "post-row.html" . }}</li>
+    {{- end }}
+  </ol>
+</div>
+{{- end }}

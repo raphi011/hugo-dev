@@ -1,0 +1,1 @@
+<pre><code{{ with .Type }} class="language-{{ . }}"{{ end }}>{{ strings.TrimRight "\n" .Inner }}</code></pre>

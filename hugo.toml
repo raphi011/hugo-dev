@@ -1,40 +1,11 @@
-# Theme configuration
-# https://gohugo.io/getting-started/configuration/#configure-build
+# Theme defaults. A site overrides any of these under [params] in its own config.
 
-[build]
-  [build.buildStats]
-    enable = true
-  [[build.cachebusters]]
-    source = "assets/notwatching/hugo_stats\\.json"
-    target = "css"
-  [[build.cachebusters]]
-    source = "assets/.*\\.css"
-    target = "css"
-
-[module]
-  [[module.mounts]]
-    source = "hugo_stats.json"
-    target = "assets/notwatching/hugo_stats.json"
-    disableWatch = true
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-  [[module.mounts]]
-    source = "layouts"
-    target = "layouts"
-  [[module.mounts]]
-    source = "data"
-    target = "data"
-  [[module.mounts]]
-    source = "i18n"
-    target = "i18n"
-  [[module.mounts]]
-    source = "archetypes"
-    target = "archetypes"
-
-[markup]
-  [markup.highlight]
-    codeFences = false
+[params]
+  homePostCount = 12
+  dateFormat = "Jan 2, 2006"
+  listDateFormat = "Jan 2"
+  tagDateFormat = "Jan 2006"
+  showLastmod = false
+  showRssInNav = true
+  showPoweredBy = true
+  tagIndex = true
