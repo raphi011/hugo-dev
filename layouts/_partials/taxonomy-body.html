@@ -1,0 +1,43 @@
+{{- if eq .Kind "term" }}
+<header class="page-header rise">
+  {{- with .Parent }}
+  <a class="back" href="{{ .RelPermalink }}"><span class="arr" aria-hidden="true">←</span>{{ i18n "back_to_all" }} {{ lower .Title }}</a>
+  {{- end }}
+  <p class="kicker">// {{ i18n "posts_count" (len .Pages) }}</p>
+  <h1 class="page-title">#{{ .Data.Term | default .Title }}</h1>
+  {{- with .Content }}<div class="intro-text">{{ . }}</div>{{ end }}
+</header>
+
+<section class="years">
+  {{ partial "posts-by-year.html" .Pages.ByDate.Reverse }}
+</section>
+{{- else }}
+{{- $total := len (where site.RegularPages "Section" "in" site.MainSections) }}
+{{- $terms := .Data.Terms.ByCount }}
+<header class="page-header rise">
+  <p class="kicker">// {{ len $terms }} {{ lower .Title }} {{ i18n "across" }} {{ i18n "posts_count" $total }}</p>
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Content }}<div class="intro-text">{{ . }}</div>{{ end }}
+</header>
+
+<ul class="terms rise" style="--d: 100ms" aria-label="{{ .Title }}">
+  {{- range $terms }}
+  <li><a class="tag" href="{{ if site.Params.tagIndex }}#{{ .Name | anchorize }}{{ else }}{{ .Page.RelPermalink }}{{ end }}">#{{ .Page.Data.Term | default .Name }}<span class="count">{{ .Count }}</span></a></li>
+  {{- end }}
+</ul>
+
+{{- if site.Params.tagIndex }}
+<section class="tag-index rise" style="--d: 200ms" aria-label="{{ i18n "browse_by_tag" }}">
+  {{- range $terms }}
+  <div class="year-group tag-group" id="{{ .Name | anchorize }}">
+    <h2 class="year"><a class="tag-name" href="{{ .Page.RelPermalink }}"><span class="hash">#</span>{{ .Page.Data.Term | default .Name }}</a></h2>
+    <ol class="post-list">
+      {{- range .Pages.ByDate.Reverse }}
+      <li>{{ partial "post-row.html" (dict "page" . "fmt" site.Params.tagDateFormat "vt" false) }}</li>
+      {{- end }}
+    </ol>
+  </div>
+  {{- end }}
+</section>
+{{- end }}
+{{- end }}

@@ -1,2 +1,2 @@
 dev:
-    cd exampleSite && hugo server --themesDir ../.. --port 1313
+    cd exampleSite && hugo server --port 1313

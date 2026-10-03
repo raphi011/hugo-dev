@@ -1,0 +1,11 @@
+{{- $lang := .Type | default "text" -}}
+{{- $label := or .Attributes.title .Attributes.file .Type -}}
+{{- /* Always emit classes: the theme colours code from CSS variables (light + dark) */ -}}
+{{- $opts := merge .Options (dict "noClasses" false) -}}
+<figure class="code-block">
+  <figcaption class="code-head">
+    {{- with $label }}<span class="code-label">{{ . }}</span>{{ end }}
+    <button class="copy" type="button" aria-label="{{ i18n "copy_code" }}" data-copy="{{ i18n "copy" }}" data-copied="{{ i18n "copied" }}" hidden>{{ partial "icon.html" "copy" }}<span>{{ i18n "copy" }}</span></button>
+  </figcaption>
+  {{- transform.Highlight (strings.TrimRight "\n" .Inner) $lang $opts -}}
+</figure>

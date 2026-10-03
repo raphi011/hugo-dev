@@ -1,21 +1,73 @@
-# Pagination
-prev_page:
-  other: "Newer posts"
-next_page:
-  other: "Older posts"
+# Layout
+skip_to_content:
+  other: "Skip to content"
+rss_feed:
+  other: "RSS feed"
+built_with_hugo:
+  other: "built with hugo"
 
-# Homepage sections
-writing_heading:
-  other: "Writing"
-projects_heading:
-  other: "Projects"
-view_all_writing:
-  other: "All posts"
-opens_new_tab:
-  other: "(opens in new tab)"
+# Home and lists
+latest:
+  other: "Latest"
+read_post:
+  other: "read post"
+all_posts:
+  other: "all posts"
+all_posts_and_tags:
+  other: "all posts & tags"
+browse_by_tag:
+  other: "browse by tag"
+posts_count:
+  one: "{{ .Count }} post"
+  other: "{{ .Count }} posts"
+across:
+  other: "across"
+back_to_all:
+  other: "all"
+
+# Posts
+reading_time:
+  one: "{{ .Count }} min read"
+  other: "{{ .Count }} min read"
+updated:
+  other: "updated"
+older:
+  other: "older"
+newer:
+  other: "newer"
+on_this_page:
+  other: "On this page"
+
+# Plain pages
+facts_title:
+  other: "now"
+links_title:
+  other: "elsewhere"
+
+# Code blocks
+copy:
+  other: "copy"
+copied:
+  other: "copied"
+copy_code:
+  other: "Copy code"
+
+# Alerts
+note:
+  other: "Note"
+tip:
+  other: "Tip"
+important:
+  other: "Important"
+warning:
+  other: "Warning"
+caution:
+  other: "Caution"
 
 # 404
 page_not_found:
-  other: "Page not found."
+  other: "Nothing posted here."
+page_not_found_text:
+  other: "The page you're looking for doesn't exist, or it moved."
 back_home:
-  other: "Back home"
+  other: "back home"

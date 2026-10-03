@@ -1,0 +1,10 @@
+{{- /* Context: a Page, or dict "page" Page "fmt" dateFormat "vt" bool (view-transition name; off when a post may appear twice on a page) */ -}}
+{{- $p := . }}{{ $fmt := site.Params.listDateFormat }}{{ $vt := true }}
+{{- if reflect.IsMap . }}{{ $p = .page }}{{ with .fmt }}{{ $fmt = . }}{{ end }}{{ if isset . "vt" }}{{ $vt = .vt }}{{ end }}{{ end }}
+{{- with $p }}
+<a class="post-row" href="{{ .RelPermalink }}">
+  <span class="post-title"{{ if $vt }} style="view-transition-name: t-{{ substr (md5 .RelPermalink) 0 12 }}"{{ end }}>{{ .LinkTitle }}</span>
+  <span class="leader" aria-hidden="true"></span>
+  <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $fmt }}</time>
+</a>
+{{- end }}

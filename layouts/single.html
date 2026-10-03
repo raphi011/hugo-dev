@@ -1,0 +1,90 @@
+{{ define "main" }}
+{{- $isPost := and (in site.MainSections .Section) (not .Params.hideMeta) }}
+{{- if $isPost }}<div class="progress" aria-hidden="true"></div>{{ end }}
+
+<article{{ if not $isPost }} class="is-page"{{ end }}>
+  <header class="article-header rise">
+    {{- if not $isPost }}{{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}{{ end }}
+    {{- if $isPost }}
+    {{- with .Parent }}
+    <a class="back" href="{{ .RelPermalink }}"><span class="arr" aria-hidden="true">←</span>{{ i18n "back_to_all" }} {{ lower .Title }}</a>
+    {{- end }}
+    <p class="meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format site.Params.dateFormat }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ i18n "reading_time" .ReadingTime }}</span>
+      {{- if and (gt .Lastmod .Date) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) site.Params.showLastmod }}
+      <span aria-hidden="true">·</span>
+      <span>{{ i18n "updated" }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format site.Params.dateFormat }}</time></span>
+      {{- end }}
+    </p>
+    {{- end }}
+    <h1 class="article-title"{{ if $isPost }} style="view-transition-name: t-{{ substr (md5 .RelPermalink) 0 12 }}"{{ end }}>{{ .Params.heading | default .Title }}</h1>
+    {{- with and (site.GetPage "/tags") (.GetTerms "tags") }}
+    <ul class="tags" aria-label="Tags">
+      {{- range . }}
+      <li><a class="tag" href="{{ .RelPermalink }}">#{{ .Data.Term | default .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </header>
+
+  {{- if and .Params.toc (gt (len .TableOfContents) 40) }}
+  <details class="toc rise" style="--d: 80ms">
+    <summary>{{ i18n "on_this_page" }}</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{- end }}
+
+  <div class="prose rise" style="--d: 140ms">
+    {{ .Content }}
+  </div>
+
+  {{- if not $isPost }}
+  {{- with .Params.facts }}
+  <section class="info-group rise" style="--d: 200ms" aria-labelledby="facts-heading">
+    <h2 class="year" id="facts-heading">{{ $.Params.factsTitle | default (i18n "facts_title") }}</h2>
+    <dl class="facts">
+      {{- range . }}
+      <div class="fact-row"><dt>{{ .label }}</dt><span class="leader" aria-hidden="true"></span><dd>{{ .value | markdownify }}</dd></div>
+      {{- end }}
+    </dl>
+  </section>
+  {{- end }}
+  {{- $links := .Params.links }}
+  {{- if and (not $links) .Params.showSocial }}{{ $links = site.Params.social }}{{ end }}
+  {{- with $links }}
+  <section class="info-group rise" style="--d: 260ms" aria-labelledby="links-heading">
+    <h2 class="year" id="links-heading">{{ $.Params.linksTitle | default (i18n "links_title") }}</h2>
+    <ul class="link-grid">
+      {{- range . }}
+      <li><a class="link-row" href="{{ .url }}"{{ if hasPrefix .url "http" }} rel="me noopener"{{ end }}><span class="label">{{ .name }}</span><span class="out" aria-hidden="true">↗</span></a></li>
+      {{- end }}
+      {{- if $.Params.showSocial }}{{ with site.Home.OutputFormats.Get "rss" }}
+      <li><a class="link-row" href="{{ .RelPermalink }}"><span class="label">rss</span><span class="out" aria-hidden="true">↗</span></a></li>
+      {{- end }}{{ end }}
+    </ul>
+  </section>
+  {{- end }}
+  {{- end }}
+
+  {{- if $isPost }}
+  {{- $newer := .NextInSection }}
+  {{- $older := .PrevInSection }}
+  {{- if or $newer $older }}
+  <nav class="pager" aria-label="{{ i18n "all_posts" }}">
+    {{- with $older }}
+    <a class="pn is-prev" href="{{ .RelPermalink }}"><span class="pn-dir">← {{ i18n "older" }}</span><span class="pn-title">{{ .LinkTitle }}</span></a>
+    {{- end }}
+    {{- with $newer }}
+    <a class="pn is-next" href="{{ .RelPermalink }}"><span class="pn-dir">{{ i18n "newer" }} →</span><span class="pn-title">{{ .LinkTitle }}</span></a>
+    {{- end }}
+  </nav>
+  {{- else }}
+  <div class="pager-end"></div>
+  {{- end }}
+  {{- else }}
+  <div class="pager-end"></div>
+  {{- end }}
+</article>
+{{ end }}

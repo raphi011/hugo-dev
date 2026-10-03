@@ -1,0 +1,16 @@
+{{ define "main" }}
+<header class="page-header rise">
+  <p class="kicker">// {{ i18n "posts_count" (len .RegularPagesRecursive) }}</p>
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Content }}<div class="intro-text">{{ . }}</div>{{ end }}
+</header>
+
+<section class="years">
+  {{ partial "posts-by-year.html" .RegularPagesRecursive.ByDate.Reverse }}
+  {{- with site.Taxonomies.tags }}
+  {{- with site.GetPage "/tags" }}
+  <a class="post-row more-link" href="{{ .RelPermalink }}"><span class="post-title">{{ i18n "browse_by_tag" }}</span><span aria-hidden="true">→</span></a>
+  {{- end }}
+  {{- end }}
+</section>
+{{ end }}

@@ -1,47 +1,45 @@
 {{ define "main" }}
-  {{ with .Content }}<div class="prose max-w-none mb-8">{{ . }}</div>{{ end }}
+{{- with site.Params.intro }}
+<section class="intro rise">
+  {{- with .kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+  {{- with .title }}<h1 class="intro-title">{{ . | markdownify }}</h1>{{ end }}
+  {{- with .text }}<p class="intro-text">{{ . | markdownify }}</p>{{ end }}
+</section>
+{{- else }}
+<section class="intro rise">
+  <h1 class="intro-title">{{ site.Title }}</h1>
+  {{- with site.Params.description }}<p class="intro-text">{{ . }}</p>{{ end }}
+</section>
+{{- end }}
 
-  {{/* Writing section — section name and post count are configurable via site params */}}
-  {{ $writingSection := .Site.Params.writingSection | default "writing" }}
-  {{ $postCount := .Site.Params.homepagePostCount | default 5 | int }}
-  {{ $writing := where .Site.RegularPages "Section" $writingSection }}
-  {{ with $writing }}
-    <section class="mb-12">
-      <h2 class="text-xl font-semibold mb-4">
-        <a href="{{ printf "%s/" $writingSection | relURL }}" class="text-ctp-text hover:text-ctp-blue transition-colors">
-          {{ i18n "writing_heading" | default "Writing" }}
-        </a>
-      </h2>
-      <div class="space-y-4">
-        {{ range first $postCount . }}
-          {{ partial "writing-item.html" (dict "page" . "headingLevel" "h3") }}
-        {{ end }}
-      </div>
-      {{ if gt (len .) $postCount }}
-        <p class="mt-4">
-          <a href="{{ printf "%s/" $writingSection | relURL }}" class="text-sm text-ctp-blue hover:text-ctp-sky transition-colors">
-            {{ i18n "view_all_writing" | default "All posts" }} &rarr;
-          </a>
-        </p>
-      {{ end }}
-    </section>
-  {{ end }}
+{{- with .Content }}
+<div class="prose rise" style="--d: 80ms">{{ . }}</div>
+{{- end }}
 
-  {{/* Projects section — section name is configurable via site params */}}
-  {{ $projectsSection := .Site.Params.projectsSection | default "projects" }}
-  {{ $projects := where .Site.RegularPages "Section" $projectsSection }}
-  {{ with $projects }}
-    <section>
-      <h2 class="text-xl font-semibold mb-4">
-        <a href="{{ printf "%s/" $projectsSection | relURL }}" class="text-ctp-text hover:text-ctp-blue transition-colors">
-          {{ i18n "projects_heading" | default "Projects" }}
-        </a>
-      </h2>
-      <div class="space-y-4">
-        {{ range sort . "Params.weight" }}
-          {{ partial "project-card.html" (dict "project" . "compact" true) }}
-        {{ end }}
-      </div>
-    </section>
-  {{ end }}
+{{- $sections := site.MainSections }}
+{{- $posts := (where site.RegularPages "Section" "in" $sections).ByDate.Reverse }}
+{{- $limit := site.Params.homePostCount }}
+
+{{- with index $posts 0 }}
+<section class="featured rise" style="--d: 120ms" aria-label="{{ i18n "latest" }}">
+  <a class="post-row" href="{{ .RelPermalink }}">
+    <span class="eyebrow">{{ i18n "latest" }}<span class="rule" aria-hidden="true"></span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format site.Params.dateFormat }}</time></span>
+    <span class="post-title" style="view-transition-name: t-{{ substr (md5 .RelPermalink) 0 12 }}">{{ .LinkTitle }}</span>
+    {{- $summary := .Description | default (.Summary | plainify | htmlUnescape | truncate 200) }}
+    {{- with $summary }}<span class="summary">{{ . }}</span>{{ end }}
+    <span class="arrow">{{ i18n "read_post" }} →</span>
+  </a>
+</section>
+{{- end }}
+
+{{- if gt (len $posts) 1 }}
+<section class="years" aria-label="{{ i18n "all_posts" }}">
+  {{ partial "posts-by-year.html" (first $limit (after 1 $posts)) }}
+  {{- with site.GetPage (printf "/%s" (index $sections 0)) }}
+  <a class="post-row more-link" href="{{ .RelPermalink }}"><span class="post-title">{{ if and site.Taxonomies.tags (site.GetPage "/tags") }}{{ i18n "all_posts_and_tags" }}{{ else }}{{ i18n "all_posts" }}{{ end }}</span><span aria-hidden="true">→</span></a>
+  {{- end }}
+</section>
+{{- else }}
+<div class="years"></div>
+{{- end }}
 {{ end }}

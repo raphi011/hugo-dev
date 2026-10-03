@@ -1,7 +1,4 @@
-/node_modules
 /public
 exampleSite/public
 /resources
 .hugo_build.lock
-hugo_stats.json
-package-lock.json
